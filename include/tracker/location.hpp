@@ -30,7 +30,7 @@ struct location {
   location(location&&) = delete;
 };
 #endif
+} // namespace location_tracker
 #define FROM_LOCATION                                                          \
   [[maybe_unused]] location_tracker::location _from =                          \
       std::source_location::current()
-} // namespace location_tracker

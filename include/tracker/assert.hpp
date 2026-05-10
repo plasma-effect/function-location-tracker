@@ -2,11 +2,12 @@
 
 #include "tracker/location.hpp"
 
-namespace location_tracker::detail {
 #ifdef LOCAL_DEBUG
+namespace location_tracker::detail {
 [[noreturn]] void
 fail(const char* expr, std::source_location loc,
      std::vector<std::pair<std::string, std::string>> const& values);
+} // namespace location_tracker::detail
 #define TRACKER_ASSERT(...)                                                    \
   (static_cast<bool>(__VA_ARGS__)                                              \
        ? void(0)                                                               \
@@ -36,4 +37,3 @@ fail(const char* expr, std::source_location loc,
 #define TRACKER_EXPECT_1(value0, ...) TRACKER_ASSERT(__VA_ARGS__)
 #define TRACKER_EXPECT_2(value0, value1, ...) TRACKER_ASSERT(__VA_ARGS__)
 #endif
-} // namespace location_tracker::detail
