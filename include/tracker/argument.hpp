@@ -11,3 +11,11 @@ template <typename T> struct argument {
       : value(std::forward<U>(u)), loc_(loc) {}
 };
 } // namespace location_tracker
+
+template <typename T>
+struct std::formatter<location_tracker::argument<T>> : std::formatter<T> {
+  auto format(location_tracker::argument<T> const& a,
+              std::format_context& ctx) const {
+    return std::formatter<T>::format(a.value, ctx);
+  }
+};
