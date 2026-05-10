@@ -32,4 +32,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 .PHONY: clean
 	rm -rf $(OBJ_DIR) $(TARGET)
 
+PREFIX ?= /usr/local
+
+.PHONY: install
+install: $(TARGET)
+	mkdir -p $(PREFIX)/include
+	mkdir -p $(PREFIX)/lib
+	cp -r $(INC_DIR)/* $(PREFIX)/include/
+	cp $(TARGET) $(PREFIX)/lib/
+
+.PHONY: uninstall
+uninstall:
+	rm -f $(PREFIX)/lib/$(TARGET)
+
 -include $(DEPS)
