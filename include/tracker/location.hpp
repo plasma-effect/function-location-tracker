@@ -24,7 +24,7 @@ struct location {
 };
 #else
 struct location {
-  constexpr location(std::source_location loc) {}
+  constexpr location(std::source_location) {}
   constexpr ~location() = default;
   location(location const&) = delete;
   location(location&&) = delete;
