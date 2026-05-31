@@ -9,13 +9,15 @@ void push(std::source_location loc);
 void pop();
 } // namespace detail
 struct location {
-  constexpr location(std::source_location loc) {
-    if !consteval {
+  bool is_constant;
+  constexpr location(std::source_location loc)
+      : is_constant(std::is_constant_evaluated()) {
+    if (!is_constant) {
       detail::push(loc);
     }
   }
   constexpr ~location() {
-    if !consteval {
+    if (!is_constant) {
       detail::pop();
     }
   }
